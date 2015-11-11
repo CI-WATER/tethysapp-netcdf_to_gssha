@@ -1,0 +1,11 @@
+{% extends "netcdf_to_gssha/base.html" %}
+{% load staticfiles tethys_gizmos %}
+
+{% block app_content %}
+  <h1>Your data is ready!</h1>
+  <a id='get_data_btn' href="{% url 'netcdf_to_gssha:download' job_id %}" class="btn btn-success">Get Data</a>
+{% endblock %}
+
+{% block app_actions %}
+
+{% endblock %}

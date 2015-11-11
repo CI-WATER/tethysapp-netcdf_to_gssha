@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: tethysapp-netcdf-to-gssha
+Version: 0.0
+Summary: Convert NetCDF files to ASCII grids as input for GSSHA
+Home-page: UNKNOWN
+Author: sdc50
+Author-email: sdc50@byu.net
+License: BSD 2-clause
+Description: UNKNOWN
+Platform: UNKNOWN

@@ -1,0 +1,22 @@
+{% extends "netcdf_to_gssha/base.html" %}
+{% load staticfiles tethys_gizmos %}
+
+{% block app_content %}
+  <form method="get">
+    {% csrf_token %}
+    {% if file_select_options %}
+      {% gizmo select_input file_select_options %}
+    {% else %}
+      <p>{{ file_name }}</p>
+    {% endif %}
+    <input type="hidden" name="selected_file" value="{{ selected_file }}"/>
+    {% if variable_select_options %}
+      {% gizmo select_input variable_select_options %}
+    {% endif %}
+  </form>
+
+{% endblock %}
+
+{% block app_actions %}
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "netcdf_to_gssha/base.html" %}
+{% load staticfiles tethys_gizmos %}
+
+{% block app_content %}
+  <h1>Jobs</h1>
+
+  {% gizmo jobs_table jobs_table_options %}
+
+{% endblock %}
