@@ -43,7 +43,7 @@ class NetcdfToGsshaInput(TethysAppBase):
         """
         handoff_handlers = (HandoffHandler(name='convert-netcdf',
                                            handler='netcdf_to_gssha.handoff.convert_netcdf',
-                                           internal=True
+                                           # internal=True
                             ),
                             HandoffHandler(name='old-convert-netcdf',
                                            handler='handoff:convert_netcdf')
