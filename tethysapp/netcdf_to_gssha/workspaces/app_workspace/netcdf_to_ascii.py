@@ -212,6 +212,6 @@ if __name__ == '__main__':
     input_file_name = sys.argv[1]
     variable = sys.argv[2]
     file_type = sys.argv[3]
-    create_ascii(input_file_name, variable, timesteps, bbox, no_data_value, file_type)
+    create_ascii(input_file_name, variable, timesteps, bbox, no_data_value, None, file_type)
 
 
