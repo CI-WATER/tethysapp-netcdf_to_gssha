@@ -71,7 +71,7 @@ def home(request):
         variable_index = int(request.GET['variable_select'])
         selected_file = request.GET['selected_file']
         file_name = os.path.basename(selected_file)
-        file_type = request.GET['file_type']
+        file_type = 'GRASS' if 'file_type' in request.GET else 'ARC'
         nc_file = nc.Dataset(selected_file, 'r')
         variables = nc_file.variables
         variable = [var for var in variables][variable_index]

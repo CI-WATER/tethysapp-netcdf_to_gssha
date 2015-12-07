@@ -10,9 +10,11 @@
       <p>{{ file_name }}</p>
     {% endif %}
     <input type="hidden" name="selected_file" value="{{ selected_file }}"/>
+    {% if toggle_switch_options %}
+      {% gizmo toggle_switch toggle_switch_options %}
+    {% endif %}
     {% if variable_select_options %}
       {% gizmo select_input variable_select_options %}
-      {% gizmo toggle_switch toggle_switch_options %}
     {% endif %}
   </form>
 
