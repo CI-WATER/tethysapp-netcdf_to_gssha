@@ -1,4 +1,4 @@
-#!/Users/sdc50/Documents/_MyDocuments/CI-Water/code/venvs/tethys/bin/python
+#!/usr/lib/tethys/bin/python
 import netCDF4 as nc
 import numpy as np
 import time
@@ -78,7 +78,6 @@ def write_header(data, bounding_box_indices, no_data, output_format):
     rows = 1 + abs(bounding_box_indices['east'] - bounding_box_indices['west'])
     cols = 1 + abs(bounding_box_indices['north'] - bounding_box_indices['south'])
     cell_size = half_cell_width * 2
-
 
     header_values = {'north': north,
                      'south': south,
@@ -200,24 +199,19 @@ def create_ascii(input_file_name,
     zip_files(output_zipfile_name, output_files)
 
 if __name__ == '__main__':
-    north = 31.728561
-    south = 31.260265
-    east = -97.83671982557564
-    west = -98.56979539581116
-    bbox = (north, south, east, west)
-
     # input_file_name = 'SSW_Download-1446756228.52.nc'
     # variable = 'SOILM_110_DBLY'
-    input_file_name = '../user_workspaces/sdc50/SSW_Download-1447185644.69.nc'
+    input_file_name = '../user_workspaces/sdc50/SSW_Download-1446756228.52.nc'
     variable = 'APCPsfc_110_SFC_acc1h'
     # variable = 'SOILM_GDS0_DBLY'
     timesteps = None#(0,)
     bbox = None
-    no_data_value = None
+    no_data_value = -9999
 
     import sys
     input_file_name = sys.argv[1]
     variable = sys.argv[2]
-    create_ascii(input_file_name, variable, timesteps, bbox, no_data_value)
+    file_type = sys.argv[3]
+    create_ascii(input_file_name, variable, timesteps, bbox, no_data_value, file_type)
 
 

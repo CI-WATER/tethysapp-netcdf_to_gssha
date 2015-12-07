@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.utils.encoding import smart_str
 from django.core.servers.basehttp import FileWrapper
 
-from tethys_sdk.gizmos import SelectInput, JobsTable
+from tethys_sdk.gizmos import SelectInput, JobsTable, ToggleSwitch
 
 from app import NetcdfToGsshaInput as app
 
@@ -40,6 +40,7 @@ def home(request):
 
 
     variable_select_options = None
+    toggle_switch_options = None
     selected_file = None
     file_name = None
 
@@ -57,25 +58,36 @@ def home(request):
                             original=True,
                             attributes='onchange=this.form.submit()')
 
+        toggle_switch_options = ToggleSwitch(display_text='File Type',
+                                               name='file_type',
+                                               on_label='GRASS',
+                                               off_label='ARC',
+                                               on_style='success',
+                                               off_style='primary',
+                                               initial=True)
+
+
     if 'variable_select' in request.GET:
         variable_index = int(request.GET['variable_select'])
         selected_file = request.GET['selected_file']
         file_name = os.path.basename(selected_file)
+        file_type = request.GET['file_type']
         nc_file = nc.Dataset(selected_file, 'r')
         variables = nc_file.variables
         variable = [var for var in variables][variable_index]
         job_name = 'Convert-%s-%s-%s' % (file_name, variable, time.time())
         job_description = 'Convert %s in %s to ascii rasters.' % (variable, file_name)
         job = job_manager.create_job(job_name, request.user, 'convert_to_ascii', description=job_description)
-        job.set_attribute('arguments', (file_name, variable))
+        job.set_attribute('arguments', (file_name, variable, file_type))
         job.set_attribute('transfer_input_files', ('../%s' % file_name,))
         job.set_attribute('remote_input_files', ('$(APP_WORKSPACE)/netcdf_to_ascii.py', selected_file))
         job.save()
-        job.execute()
+        # job.execute()
         return redirect('jobs/')
 
     context = {'file_select_options': file_select_options,
                'variable_select_options': variable_select_options,
+               'toggle_switch_options': toggle_switch_options,
                'file_name': file_name,
                'selected_file': selected_file}
 
