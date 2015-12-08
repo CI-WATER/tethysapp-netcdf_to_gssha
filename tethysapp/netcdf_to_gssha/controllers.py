@@ -76,7 +76,7 @@ def home(request):
         variables = nc_file.variables
         variable = [var for var in variables][variable_index]
         job_name = 'Convert-%s-%s-%s' % (file_name, variable, time.time())
-        job_description = 'Convert %s in %s to ascii rasters.' % (variable, file_name)
+        job_description = 'Convert %s in %s to %s ascii rasters.' % (variable, file_name, file_type.lower())
         job = job_manager.create_job(job_name, request.user, 'convert_to_ascii', description=job_description)
         job.set_attribute('arguments', (file_name, variable, file_type))
         job.set_attribute('transfer_input_files', ('../%s' % file_name,))
