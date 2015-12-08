@@ -15,8 +15,8 @@ cols: {cols}
 
 ARC_HEADER_TEMPLATE = """ncols {cols}
 nrows {rows}
-xllcorner {south}
-yllcorner {west}
+xllcorner {west}
+yllcorner {south}
 cellsize {cell_size}
 NODATA_value {no_data}
 """
@@ -75,8 +75,8 @@ def write_header(data, bounding_box_indices, no_data, output_format):
     east = correct_coordinate(east)
     west = correct_coordinate(west)
 
-    rows = 1 + abs(bounding_box_indices['east'] - bounding_box_indices['west'])
-    cols = 1 + abs(bounding_box_indices['north'] - bounding_box_indices['south'])
+    rows = 1 + abs(bounding_box_indices['north'] - bounding_box_indices['south'])
+    cols = 1 + abs(bounding_box_indices['east'] - bounding_box_indices['west'])
     cell_size = half_cell_width * 2
 
     header_values = {'north': north,
