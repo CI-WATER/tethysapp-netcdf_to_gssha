@@ -82,7 +82,7 @@ def home(request):
         job.set_attribute('transfer_input_files', ('../%s' % file_name,))
         job.set_attribute('remote_input_files', ('$(APP_WORKSPACE)/netcdf_to_ascii.py', selected_file))
         job.save()
-        # job.execute()
+        job.execute()
         return redirect('jobs/')
 
     context = {'file_select_options': file_select_options,
