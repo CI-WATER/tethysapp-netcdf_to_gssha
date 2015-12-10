@@ -1,6 +1,7 @@
 from tethys_sdk.base import TethysAppBase, url_map_maker
 from tethys_sdk.handoff import HandoffHandler
 from tethys_sdk.jobs import CondorJobTemplate
+from tethys_sdk.compute import get_scheduler
 
 
 class NetcdfToGsshaInput(TethysAppBase):
@@ -10,10 +11,11 @@ class NetcdfToGsshaInput(TethysAppBase):
 
     name = 'Convert NetCDF to GSSHA Input'
     index = 'netcdf_to_gssha:home'
-    icon = 'netcdf_to_gssha/images/icon.gif'
+    icon = 'netcdf_to_gssha/images/icon.png'
     package = 'netcdf_to_gssha'
     root_url = 'netcdf-to-gssha'
     color = '#34495e'
+    description = 'Converts a gridded NetCDF variable to an ascii grid for use in GSSHA. Both Arc Info and Grass ascii formats are supported.'
         
     def url_maps(self):
         """
@@ -54,12 +56,12 @@ class NetcdfToGsshaInput(TethysAppBase):
         """
         Define job templates
         """
-
+        demo = get_scheduler('Demo')
         job_templates = (CondorJobTemplate(name='convert_to_ascii',
                                        parameters={'executable': '$(APP_WORKSPACE)/netcdf_to_ascii.py',
                                                    'condorpy_template_name': 'vanilla_transfer_files',
                                                    # 'attributes': {'transfer_output_files': ('$(job_name).nc',),},
-                                                   # 'scheduler': None,
+                                                   'scheduler': demo,
                                                    # 'remote_input_files': ('$(APP_WORKSPACE)/netcdf_to_ascii.py',),
                                                   }
                                       ),
