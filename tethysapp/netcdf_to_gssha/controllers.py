@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.utils.encoding import smart_str
-from django.core.servers.basehttp import FileWrapper
+# from django.core.servers.basehttp import FileWrapper
 
 from tethys_sdk.gizmos import SelectInput, JobsTable, ToggleSwitch
 
@@ -131,10 +131,11 @@ def download(request, job_id):
     job, file_name, file_path = _get_job(job_id)
 
     try:
-        wrapper = FileWrapper(file(file_path))
-        response = HttpResponse(wrapper, content_type='application/force-download')
+        # wrapper = FileWrapper(file(file_path))
+        response = HttpResponse(content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_name)
         response['Content-Length'] = os.path.getsize(file_path)
+        response['X-Sendfile'] = file_path
         return response
     except:
         job._status = 'ERR'
