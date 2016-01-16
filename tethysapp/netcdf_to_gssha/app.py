@@ -56,12 +56,12 @@ class NetcdfToGsshaInput(TethysAppBase):
         """
         Define job templates
         """
-        demo = get_scheduler('Demo')
+        # demo = get_scheduler('Demo')
         job_templates = (CondorJobTemplate(name='convert_to_ascii',
                                        parameters={'executable': '$(APP_WORKSPACE)/netcdf_to_ascii.py',
                                                    'condorpy_template_name': 'vanilla_transfer_files',
                                                    # 'attributes': {'transfer_output_files': ('$(job_name).nc',),},
-                                                   'scheduler': demo,
+                                                   # 'scheduler': demo,
                                                    # 'remote_input_files': ('$(APP_WORKSPACE)/netcdf_to_ascii.py',),
                                                   }
                                       ),
